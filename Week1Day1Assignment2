@@ -3,7 +3,7 @@ function isWeekend() {
 	const day = todayDate.getDay();
 	const { of } = rxjs;
 	const { filter } = rxjs.operators;
-	of(0)
+	of(day)
 	.pipe(
 filter(n => n>0)
 	)
