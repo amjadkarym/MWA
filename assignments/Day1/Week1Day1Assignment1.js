@@ -3,3 +3,7 @@ String.prototype.filterWords = function(arr){
   arr.map(val => myStr = myStr.map(n=>n.replace(val, '***')));
   return myStr.join(" ");
 }
+
+
+//run 
+// "Hello a World".filterWords(['Hello', 'World'])
