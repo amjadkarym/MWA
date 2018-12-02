@@ -43,7 +43,6 @@ let obser$ = from(axios.get('https://randomuser.me/api/?results=10'))
 )
 .subscribe(
   x => {console.log(x);
-  return x;
   }
 )
 
