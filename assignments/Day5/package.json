@@ -1,0 +1,22 @@
+{
+  "name": "1.3.expressjs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "less-middleware": "^3.0.1",
+    "morgan": "~1.9.0"
+  },
+  "main": "app.js",
+  "author": "amjad karim",
+  "license": "ISC",
+  "description": ""
+}
