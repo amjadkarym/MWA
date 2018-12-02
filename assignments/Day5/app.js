@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var lessMiddleware = require('less-middleware');
 var logger = require('morgan');
 var axios = require('axios');
+const {from} = require('rxjs');
+const {map, filter} = require('rxjs/operators');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -33,26 +35,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 
+
+// observables
+let obser$ = from(axios.get('https://randomuser.me/api/?results=10'))
+.pipe(
+  map(n => n.data.results)
+)
+.subscribe(
+  x => {console.log(x);
+  return x;
+  }
+)
+
 // async await
 const getUsersAsync = async () => {
   try {
- return await axios.get('https://randomuser.me/api/?results=10')
+ return await axios.get('https://randomuser.me/api/?results=10');
   } catch(error) {
   console.error(error);
   }
 }
 
-const usersAsync = async() => {
- const user = await getUsersAsync();
- if(user) {
-   console.log(user.data.results);
- }
-}
-
-//usersAsync();
-
 // promise
-
 const getUsersPromise = () => {
   try {
     return axios.get('https://randomuser.me/api/?results=10');
@@ -61,22 +65,9 @@ const getUsersPromise = () => {
   }
 }
 
-const usersPromise = async() => {
-  const user = getUsersPromise()
-  .then(response => {
-    if(response.data.results) {
-      console.log(response.data.results);
-    }
-  })
-  .catch(error => {
-    console.log(error);
-  })
-}
-//usersPromise();
-
-
 app.get('/user', (req, res) => {
   getUsersPromise()
+  // call getUsersAsync() as well
   .then((response) => {
     res.set({
       'Cache-control': 'private, max-age=86400',
@@ -88,21 +79,6 @@ app.get('/user', (req, res) => {
     res.json(response.data.results);
   })
 });
-
-//const pPromise = fetch('https://randomuser.me/api/?results=10');
-//pPromise
-//.then(response => {console.log(response.data.results)})
-//.catch((err) => {console.log(err)})
-
-//app.set('strict routing', true);
-//app.enable('case sensitive routing');
-//app.set('trust proxy', true);
-//app.enable('trust proxy');
-//app.set('x-powered-by', false);
-//in response
-//res.set('Cache-Control', private);
-//res.set('max-age', 86400);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
