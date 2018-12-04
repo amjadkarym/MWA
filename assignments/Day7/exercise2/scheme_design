@@ -1,0 +1,17 @@
+collections
+
+details = {
+    "student_name" : "student",
+    "book" : {"isbn_no" : 1,
+            "author" : "",
+            "tags" : ["CS", "Datascience"]
+            },
+    "return_date": ""
+}
+
+if the book data is more then 16MB, books will go to separate collection
+
+books = {"isbn_no" : 1,
+            "author" : "",
+            "tags" : ["CS", "Datascience"]
+        };
