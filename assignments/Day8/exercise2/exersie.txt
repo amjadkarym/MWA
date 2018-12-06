@@ -1,6 +1,6 @@
 simple Index
-    - Author
-    - borrowedEntries.student.studentId
+    - author
+    - book.isbn_no
 
 Multikey Index
-    - Tags
+    - tags
