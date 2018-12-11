@@ -15,10 +15,12 @@ export class CounterComponent implements OnInit {
   constructor() { }
   increase() {
     this.countValue++;
+    this.counterChange.emit(this.countValue)
     return false
   }
   decrease() {
     this.countValue--;
+    this.counterChange.emit(this.countValue)
     return false
   }
   ngOnInit() {
